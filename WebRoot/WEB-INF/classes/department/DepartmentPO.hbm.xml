@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="department">
+    <class name="DepartmentPO" table="department">
+        <id name="id" type="string" column="id" length="12">
+            <generator class="assigned"/>
+        </id>
+        <property name="name" type="string" column="name" length="20"/>
+        <property name="type" type="string" column="type" length="20"/>
+    </class>
+</hibernate-mapping>

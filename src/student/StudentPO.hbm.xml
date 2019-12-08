@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="student">
+    <class name="StudentPO" table="student">
+        <id name="number" type="string" column="number">
+            <generator class="assigned"/>
+        </id>
+        <property name="name" type="string" column="name" length="20"/>
+        <property name="password" type="string" column="password" length="20"/>
+        <property name="age" type="int" column="age"/>
+        <property name="sex" type="string" column="sex" length="16"/>
+        <property name="phone" type="string" column="phone" length="20"/>
+        <property name="department" type="string" column="department" length="20"/>
+        <one-to-one name="departmentPO"  constrained="false" ></one-to-one><!--设置外键  -->
+    </class>
+</hibernate-mapping>

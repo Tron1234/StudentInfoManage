@@ -1,0 +1,108 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.configuration.xml.reload" value="true"/> 
+    <constant name="struts.convention.classes.reload" value="true"/>
+    <constant name="struts.devMode" value="true" />
+    <package name="basicstruts2" extends="struts-default">
+        <action name="loginmian" class="LoginInfo.loginAction" method="type">
+        </action><!--通过此action获得选中的人员类别的值  -->
+        <action name="loginmain" class="LoginInfo.loginAction" method="main">
+        	<result name="input">/LoginInfo/login.jsp</result>
+            <result name="error">/LoginInfo/login_error.jsp</result>
+            <result name="error1">/LoginInfo/login_error1.jsp</result>
+            <result name="success_student">/StudentInfo/student_main.jsp</result>
+            <result name="success_admin">/AdminInfo/admin_main.jsp</result>
+        </action><!--登录页面的action  -->
+        <action name="studentcheck" class="student_action.student_check">
+            <result name="success">/AdminInfo/admin_studentInfo/admin_studentInfo_check.jsp</result>
+            <result name="input">/AdminInfo/admin_main.jsp</result>
+        </action><!-- 教师对所有学生的查询 -->
+        <action name="studentchoose1" class="student_action.student_check">
+        	<result name="success">/AdminInfo/admin_studentInfo/admin_studentInfo_choose.jsp</result>
+        </action><!-- 用action显示所有学生学号，选择并进行下一步的修改 -->
+        <action name="studentchoose2" class="student_action.student_check">
+        	<result name="success">/AdminInfo/admin_studentInfo/admin_studentInfo_delete.jsp</result>
+        </action><!-- 用action显示所有学生学号，选择并进行下一步的删除 -->
+        <action name="studentadd_jump" class="student_action.student_jump">
+        	<result name="success">/AdminInfo/admin_studentInfo/admin_studentInfo_add.jsp</result>
+        </action><!--获取所有部门的名称供给老师选择学生部门  -->
+        <action name="studentadd" class="student_action.student_add">
+            <result name="input">/AdminInfo/admin_studentInfo/admin_studentInfo_add.jsp</result>
+            <result name="error">/AdminInfo/admin_studentInfo/admin_studentInfo_add_error.jsp</result>
+            <result name="success" type="chain">studentcheck</result>
+        </action><!-- 教师对所有学生的添加 -->
+        <action name="studentupdatecheck" class="student_action.student_check_select">
+        	<result name="input">/AdminInfo/admin_studentInfo/admin_studentInfo_update.jsp</result>
+        </action><!--获取选中学生的信息显示在页面中便于修改  -->
+        <action name="studentupdate" class="student_action.student_update">
+            <result name="error">/AdminInfo/admin_studentInfo/admin_studentInfo_update_error.jsp</result>
+            <result name="success">LoginInfo/login.jsp</result>
+        </action><!-- 教师对指定学生的修改 -->
+        <action name="studentdelete" class="student_action.student_delete">
+            <result name="input">/AdminInfo/admin_studentInfo/admin_studentInfo_delete.jsp</result>
+            <result name="success" type="chain">studentcheck</result>
+        </action><!-- 教师对指定学生的删除 -->
+        <action name="departmentcheck" class="department_action.department_check">
+            <result name="success">/AdminInfo/admin_departmentInfo/admin_departmentInfo_check.jsp</result>
+            <result name="input">/AdminInfo/admin_main.jsp</result>
+        </action><!-- 教师对部门的查询 -->
+        <action name="departmentadd_jump">
+        	<result>/AdminInfo/admin_departmentInfo/admin_departmentInfo_add.jsp</result>
+        </action><!--由于struts的过滤器将css、js样式过滤掉，所以只能用struts进行跳转到部门信息添加  -->
+        <action name="departmentadd" class="department_action.department_add">
+            <result name="input">/AdminInfo/admin_departmentInfo/admin_departmentInfo_add.jsp</result>
+           <result name="error">/AdminInfo/admin_departmentInfo/admin_departmentInfo_add_error.jsp</result>
+            <result name="success" type="chain">departmentcheck</result>
+        </action><!-- 教师对部门的添加 -->
+        <action name="departmentchoose1" class="department_action.department_check">
+        	<result name="success">/AdminInfo/admin_departmentInfo/admin_departmentInfo_choose.jsp</result>
+        </action><!-- 用action显示所有部门编号，选择并进行下一步的修改 -->
+        <action name="departmentchoose2" class="department_action.department_check">
+        	<result name="success">/AdminInfo/admin_departmentInfo/admin_departmentInfo_delete.jsp</result>
+        </action><!-- 用action显示所有部门编号 ，选择并进行下一步的删除-->
+        <action name="departmentupdatecheck" class="department_action.department_check_select">
+        	<result name="input">/AdminInfo/admin_departmentInfo/admin_departmentInfo_update.jsp</result>
+        </action><!--获取选中部门的信息显示在页面中便于修改  -->
+        <action name="departmentupdate" class="department_action.department_update">
+            <result name="error">/AdminInfo/admin_departmentInfo/admin_departmentInfo_update_error.jsp</result>
+            <result name="success" type="chain">departmentcheck</result>
+        </action><!-- 教师对选中部门的修改 -->
+        <action name="departmentdelete" class="department_action.department_delete">
+            <result name="input">/AdminInfo/admin_departmentInfo/admin_departmentInfo_delete.jsp</result>
+            <result name="success" type="chain">departmentcheck</result>
+        </action><!-- 教师对选中部门的删除 -->
+        <action name="adminupdatecheck" class="admin_action.admin_update_check">
+            <result name="input">/AdminInfo/admin_update.jsp</result>
+        </action><!--获取登录教师的信息显示在页面中便于修改  -->
+        <action name="adminupdate" class="admin_action.admin_update">
+            <result name="error">/AdminInfo/admin_update_error.jsp</result>
+            <result name="success">LoginInfo/login.jsp</result>
+        </action><!-- 教师对自己信息的修改 -->
+        <action name="adminadd_jump">
+        	<result>/AdminInfo/admin_add.jsp</result>
+        </action><!--由于struts的过滤器将css、js样式过滤掉，所以只能用struts进行跳转到教师信息添加  -->
+        <action name="adminadd" class="admin_action.admin_add">
+            <result name="input">/AdminInfo/admin_add.jsp</result>
+            <result name="error">/AdminInfo/admin_add_error.jsp</result>
+            <result name="error1">/AdminInfo/admin_add_error1.jsp</result>
+            <result name="success">/AdminInfo/admin_main.jsp</result>
+        </action><!-- 教师对其他教师信息的添加 -->
+        <action name="studentcheck1" class="student1_action.student_check">
+            <result name="success">/StudentInfo/student_studentInfo_check.jsp</result>
+            <result name="input">/StudentInfo/student_main.jsp</result>
+        </action><!--登录学生对自己信息的查询  -->
+        <action name="studentupdatecheck1" class="student1_action.student_check">
+            <result name="success">/StudentInfo/student_studentInfo_update.jsp</result>
+        </action><!--获取登录学生的信息显示在页面中便于修改  -->
+        <action name="studentupdate1" class="student1_action.student_update">
+            <result name="error">/StudentInfo/student_studentInfo_update_error.jsp</result>
+            <result name="success">/StudentInfo/student_studentInfo_check.jsp</result>
+        </action><!--登录学生对自己信息的修改  -->
+        <action name="exitsystem" class="LoginInfo.loginexit">
+            <result name="success">LoginInfo/login.jsp</result>
+        </action><!-- 退出系统 -->
+    </package>
+</struts>
